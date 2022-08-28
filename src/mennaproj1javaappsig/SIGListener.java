@@ -29,7 +29,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
     private MennaJFrame Invframe;
     private DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     
-    SIGListener(MennaJFrame Invframe) {
+    public SIGListener(MennaJFrame Invframe) {
         this.Invframe = Invframe;
     }
 
@@ -145,7 +145,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
                     Date invDate = df.parse(invDateStr);
 
                     Header inv = new Header(invNum, custName, invDate);
-                    Invframe.getLists().add(inv);
+                    Invframe.getSIGList().add(inv);
                 }
 
                 JOptionPane.showMessageDialog(Invframe, "Please Select lines file", "Attension", JOptionPane.INFORMATION_MESSAGE);
@@ -168,7 +168,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
                         InvoiceRow invLine = new InvoiceRow(itemName, itemPrice, itemCount, header);
                         header.getRows().add(invLine);
                     }
-                    Invframe.setTableModel(new TableModel(Invframe.getSIGList()));
+                    Invframe.setHModel(new TableModel(Invframe.getSIGList()));
                     Invframe.getInvTable().setModel(Invframe.getSIGTableModel());
                     Invframe.getInvTable().validate();
                 }
@@ -191,7 +191,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
 
         private Header findInvByNum(int InvNum) {
         Header header = null;
-        for (Header inv : Invframe.getLists()) {
+        for (Header inv : Invframe.getSIGList()) {
             if (InvNum == inv.getInvoiceNo()) {
                 header = inv;
                 break;
@@ -202,7 +202,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
     private void SaveFile() {
     String headers = "";
         String lines = "";
-        for (Header header : Invframe.getLists()) {
+        for (Header header : Invframe.getSIGList()) {
             headers += header.getDataAsCSV();
             headers += "\n";
             for (InvoiceRow line : header.getRows()) {
@@ -252,7 +252,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
             Date invDate = df.parse(invDateStr);
             int invNum = getSeconcInvNumber();
             Header invoiceHeader = new Header(invNum, custName, invDate);
-            Invframe.getLists().add(invoiceHeader);
+            Invframe.getSIGList().add(invoiceHeader);
             Invframe.getSIGTableModel().fireTableDataChanged();
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(Invframe, "Please enter correct date format!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -262,7 +262,7 @@ public class SIGListener implements ActionListener,ListSelectionListener {
     }
    private int getSeconcInvNumber() {
         int max = 0;
-        for (Header header : Invframe.getLists()) {
+        for (Header header : Invframe.getSIGList()) {
             if (header.getInvoiceNo() > max) {
                 max = header.getInvoiceNo();
             }

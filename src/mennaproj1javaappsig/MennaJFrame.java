@@ -4,10 +4,8 @@
  */
 package mennaproj1javaappsig;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sound.sampled.Line;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -20,25 +18,7 @@ import javax.swing.JTextField;
  */
 public class MennaJFrame extends javax.swing.JFrame {
 
-    private Dialog HDialog;
-    private LineDialog line;
-    private TableModel HModel;
-    private InvoiceRows InvoiceLines;
-    private JButton NewInv;
-    private JButton NewRow;
-    private JTextField CustName;
-    private JButton DeleteInv;
-    private JButton DeleteSelected;
-    private JTextField Date;
-    private JTable InvRows;
-    private JLabel InvNum;
-    private JLabel Total;
-    private JTable InvTable;
-    private JMenuItem LoadFile;
-    private JMenuItem SaveFile;
-    private List<Header> AllInvoices;
-    private LineDialog Line;
-    private TableModel tableModel;
+
 
     /**
      * Creates new form MennaJFrame
@@ -66,14 +46,21 @@ public class MennaJFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jTable2.getSelectionModel().addListSelectionListener(Invlistener);
         jButton4 = new javax.swing.JButton();
+        jButton4.addActionListener(Invlistener);
+        jButton1 = new javax.swing.JButton();
+        jButton1.addActionListener(Invlistener);
+        jButton6 = new javax.swing.JButton();
+        jButton6.addActionListener(Invlistener);
+        jButton2 = new javax.swing.JButton();
+        jButton2.addActionListener(Invlistener);
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem1.addActionListener(Invlistener);
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem2.addActionListener(Invlistener);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,57 +74,38 @@ public class MennaJFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "No.", "Item Name", "Item Price", "Count", "Item Total"
+
             }
         ));
         jTable1.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Item Total");
-        }
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "No.", "Date", "Customer", "Total"
+
             }
         ));
+        jTable2.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(jTable2);
         jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        jButton1.setText("Create New Invoice");
-
-        jButton2.setText("Delete Invoice");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("New Row");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         jButton4.setText("Delete Selected Invoice");
 
+        jButton1.setText("Create New Invoice");
+
+        jButton6.setText("Delete Invoice");
+
+        jButton2.setText("New Row");
+
         jMenu3.setText("File");
+        jMenu3.setBorderPainted(false);
 
         jMenuItem1.setText("Load File");
         jMenu3.add(jMenuItem1);
@@ -154,15 +122,17 @@ public class MennaJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(90, 90, 90)
+                        .addComponent(jButton4)
+                        .addGap(64, 64, 64))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,18 +142,19 @@ public class MennaJFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(212, 212, 212))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(147, 147, 147)
-                        .addComponent(jButton4)
-                        .addGap(64, 64, 64))))
+                        .addGap(212, 212, 212))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jButton1)
-                .addGap(105, 105, 105)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton1)
+                        .addGap(73, 73, 73)
+                        .addComponent(jButton6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,36 +178,57 @@ public class MennaJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
+                    .addComponent(jButton1)
+                    .addComponent(jButton6))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton2))
                 .addGap(160, 160, 160))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+       try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MennaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MennaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MennaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MennaJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            new MennaJFrame().setVisible(true);
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -254,78 +246,78 @@ public class MennaJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-private final List<Header> SIGList = new ArrayList<>();
+private   List<Header> SIGList = new ArrayList<>();
     private TableModel SIGTableModel;
     private InvoiceRows SIGInvoiceRows;
     private Dialog SIGDialog;
     private LineDialog SIGlineDialog;
-    private final SIGListener Invlistener = new SIGListener(this);
+    private  SIGListener Invlistener = new SIGListener(this);
 
     public SIGListener getInvlistener() {
         return Invlistener;
     }
         
     public void setHDialog(Dialog  HDialog) {
-        this.HDialog = HDialog;
+        this.SIGDialog = HDialog;
     }
 
     public void setLine(LineDialog  Line) {
-        this.Line = Line;
+        this.SIGlineDialog = Line;
     }
 
     public void setHModel(TableModel HModel) {
-        this.HModel = HModel;
+        this.SIGTableModel = HModel;
     }
 
     public void setInvoiceLines(InvoiceRows  InvoiceLines) {
-        this.InvoiceLines = InvoiceLines;
+        this.SIGInvoiceRows = InvoiceLines;
     }
 
  public JButton getNewInv() {
-        return NewInv;
+        return jButton1;
     }
 
     public JButton getNewRow() {
-        return NewRow;
+        return jButton2;
     }
 
   public JTextField getCustName() {
-        return CustName;
+        return jTextField2;
     }
 
     public JButton getDeleteInv() {
-        return DeleteInv;
+        return jButton6;
     }
 
     public JButton getDeleteSelected() {
-        return DeleteSelected;
+        return jButton4;
     }
 
     public JTextField getDate() {
-        return Date;
+        return jTextField3;
     }
 
     public JTable getInvRows() {
-        return InvRows;
+        return jTable1;
     }
 
     public JLabel getInvNum() {
-        return InvNum;
+        return jLabel1;
     }
 
     public JLabel getTotal() {
-        return Total;
+        return jLabel4;
     }
 
     public JTable getInvTable() {
-        return InvTable;
+        return jTable2;
     }
 public JMenuItem getLoadFile() {
-        return LoadFile;
+        return jMenuItem1;
     }
 
     public JMenuItem getSaveFile() {
-        return SaveFile;
+        return jMenuItem2;
     }
 
     public List<Header> getSIGList() {
@@ -341,28 +333,14 @@ public JMenuItem getLoadFile() {
     }
 
     public Dialog getHDialog() {
-        return HDialog;
+        return SIGDialog;
     }
 
     public LineDialog getLine() {
-        return Line;
+        return SIGlineDialog;
     }
-
-    ActionListener getInvListener() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    void setTableModel(TableModel tableModel) {
-        this.tableModel = tableModel;
-    }
-
-    List<Header> getLists() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Object getInvoicesTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+  
 }
+
+
 

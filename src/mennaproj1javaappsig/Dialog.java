@@ -5,11 +5,11 @@
 package mennaproj1javaappsig;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -17,26 +17,27 @@ import javax.swing.JTextField;
  */
 public class Dialog extends JDialog {
 
-    private final JTextField CName;
-    private final JTextField DateField;
-    private final JLabel CustomerName;
-    private final JLabel InvoiceDate;
-    private final JButton NewRow;
-    private final JButton DeleteSelected;   
+    private  JTextField CName;
+    private  JTextField DateField;
+    private  JLabel CustomerName;
+    private  JLabel InvoiceDate;
+    private  JButton NewRow;
+    private  JButton DeleteSelected;   
     
 public Dialog(MennaJFrame Invframe) {
         CustomerName = new JLabel("CustomerName");
         CName = new JTextField(35);
         InvoiceDate = new JLabel("InvoiceDate");
         DateField = new JTextField(35);
-        NewRow = new JButton("NewRow");
-        DeleteSelected = new JButton("DeleteSelected");
+        NewRow = new JButton("OK");
+        DeleteSelected = new JButton("Cancel");
         
-        NewRow.setActionCommand("createInvNewRow");
-        DeleteSelected.setActionCommand("createInvDeleteSelected");
+        NewRow.setActionCommand("NewRow");
+        DeleteSelected.setActionCommand("createInvCancel");
         
-        NewRow.addActionListener((ActionListener) Invframe.getInvlistener());
-        DeleteSelected.addActionListener((ActionListener) Invframe.getInvlistener());
+        NewRow.addActionListener(Invframe.getInvlistener());
+        DeleteSelected.addActionListener(Invframe.getInvlistener());
+
         setLayout(new GridLayout(5, 7));
         
         add(InvoiceDate);

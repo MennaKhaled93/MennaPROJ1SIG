@@ -16,14 +16,14 @@ import javax.swing.JTextField;
  */
 public class LineDialog extends JDialog{
 
-    private final JTextField NameText;
-    private final JTextField CountText;
-    private final JTextField PriceText;
-    private final JLabel NameLabel;
-    private final JLabel Count;
-    private final JLabel Price;
-    private final JButton NewRow;
-    private final JButton DeleteSelected;
+    private  JTextField NameText;
+    private  JTextField CountText;
+    private  JTextField PriceText;
+    private  JLabel NameLabel;
+    private  JLabel Count;
+    private  JLabel Price;
+    private  JButton NewRow;
+    private  JButton DeleteSelected;
  
 public LineDialog(MennaJFrame Invframe) {
         NameText = new JTextField(35);
@@ -35,14 +35,14 @@ public LineDialog(MennaJFrame Invframe) {
         PriceText = new JTextField(35);
         Price = new JLabel("Price");
         
-        NewRow = new JButton("NewRow");
-        DeleteSelected = new JButton("DeleteSelected");
+        NewRow = new JButton("OK");
+        DeleteSelected = new JButton("Cancel");
         
-        NewRow.setActionCommand("NewRow");
+        NewRow.setActionCommand("createLineOK");
         DeleteSelected.setActionCommand("DeleteSelected");
         
-        NewRow.addActionListener(Invframe.getInvListener());
-        DeleteSelected.addActionListener(Invframe.getInvListener());
+        NewRow.addActionListener(Invframe.getInvlistener());
+        DeleteSelected.addActionListener(Invframe.getInvlistener());
         setLayout(new GridLayout(5, 3));
         
         add(NameLabel);

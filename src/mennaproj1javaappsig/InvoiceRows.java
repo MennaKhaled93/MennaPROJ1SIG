@@ -15,8 +15,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class InvoiceRows extends AbstractTableModel{
 
-    private final List<InvoiceRow> Rows;
-    private final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+    private  List<InvoiceRow> Rows;
+    private  DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     
     public InvoiceRows(List<InvoiceRow> Rows) {
         this.Rows = Rows;
@@ -34,7 +34,7 @@ public class InvoiceRows extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -89,7 +89,7 @@ public class InvoiceRows extends AbstractTableModel{
             default:
                 return "";
             }
-}
+    }
 
 
         
